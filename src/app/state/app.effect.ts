@@ -7,6 +7,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects'
 
 import { CurrencyService } from '../services/currency.service'
 import * as Action from './app.actions'
+import { StorageService } from '../services/storage.service'
 
 @Injectable()
 export class AppEffects {
@@ -18,8 +19,24 @@ export class AppEffects {
       )),
     ))
 
+    // TOD: Load and save from storage the favoriteIds when needed
+    loadFavoriteIds$ = createEffect(() => this.actions$.pipe(
+      ofType(Action.LOAD_FAVORITES_FROM_STORAGE),
+      mergeMap(() => this.storageService.getFavoriteIds().pipe(
+        map(favoriteIds => ({ type: Action.LOAD_FAVORITES_FROM_STORAGE_SUCCESS, favoriteIds })),
+      )),
+    ))
+
+    saveFavoriteIds$ = createEffect(() => this.actions$.pipe(
+      ofType(Action.SAVE_FAVORITES_TO_STORAGE),
+      mergeMap(action => this.storageService.saveFavoriteIds(action).pipe(
+        map(() => ({ type: Action.LOAD_FAVORITES_FROM_STORAGE })),
+      )),
+    ))
+
     constructor(
         private actions$: Actions,
         private currencyService: CurrencyService,
+        private storageService: StorageService,
     ) {}
 }
