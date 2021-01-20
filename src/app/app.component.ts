@@ -1,4 +1,6 @@
 import { Component } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { LOAD_CURRENCIES_ACTION_TYPE } from './state/app.actions'
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core'
 })
 export class AppComponent {
   title = 'Currency App'
+
+  constructor(
+    private store: Store,
+  ) {
+    this.store.dispatch({ type: LOAD_CURRENCIES_ACTION_TYPE })
+  }
 }

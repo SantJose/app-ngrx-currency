@@ -42,3 +42,17 @@ export const selectNonFavoriteCurrenciesFiltered = createSelector(
     return selectedCurrencies
   },
 )
+
+export const selectFavoriteCurrenciesFiltered = createSelector(
+  selectCurrencies,
+  selectFavoriteIds,
+  selectSearchTerm,
+  (selectedCurrencies: Currency[], selectedFavoriteIds: string[], selectedSearchTerm: string) => {
+    if (selectedCurrencies && selectedFavoriteIds) {
+      return selectedCurrencies
+        .filter(currency => selectedFavoriteIds.indexOf(currency.asset_id) !== -1)
+        .filter(currency => currency.name?.toLocaleLowerCase().includes(selectedSearchTerm?.toLocaleLowerCase()))
+    }
+    return []
+  },
+)

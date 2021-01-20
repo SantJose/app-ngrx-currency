@@ -5,7 +5,9 @@ import {
   loadCurrencies,
   loadCurrenciesError,
   loadCurrenciesSuccess,
+  loadFavoritesFromStorage,
   removeIdFromFavorite,
+  saveFavoritesToStorage,
 } from './app.actions'
 
 const initialState = {
@@ -29,5 +31,11 @@ export const reducer = createReducer(
   })),
   on(filterCurrencyByName, (state, { searchTerm }) => ({
     ...state, searchTerm,
+  })),
+  on(saveFavoritesToStorage, state => ({
+    ...state,
+  })),
+  on(loadFavoritesFromStorage, state => ({
+    ...state,
   })),
 )
