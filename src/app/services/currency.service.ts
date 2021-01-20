@@ -22,7 +22,7 @@ export class CurrencyService {
       },
       {
         asset_id: '2',
-        name: 'prueba0',
+        name: 'prueba2',
         type_is_crypto: 1,
         price_usd: 3,
       },
