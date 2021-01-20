@@ -1,5 +1,7 @@
 # app-ngrx-currency
 
+Cryptocurrency price tracker
+
 # Functionality
     HOMEPAGE:
         [X]  Show Currencies and permit select as favorite as many as you want
